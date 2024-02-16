@@ -1,0 +1,65 @@
+import { SFTPWrapper } from 'ssh2';
+import BaseSSH2Promise from './BaseSSH2Promise';
+import SFTP from './sftp';
+import SSHConfig from "./sshConfig";
+import SSHConnection from './sshConnection';
+declare class SSH2Promise extends BaseSSH2Promise {
+    /**
+ * For caching SSH Connection
+ */
+    static __cache: any;
+    static SSH: typeof SSHConnection;
+    static Utils: {
+        peek: (arr: any[]) => any;
+        endSocket: (socket: any) => void;
+        prompt: (question: string, cb: (password: string) => void) => void;
+        createDeferredPromise: () => import("./sshUtils").Deferred<any>;
+        getRandomPort(): any;
+        randomNumber(min: number, max: number): number;
+        checkStreamError(stream: any, timeout?: number): Promise<unknown>;
+    };
+    static SFTP: typeof SFTP;
+    static Constants: {
+        CHANNEL: {
+            SSH: string;
+            TUNNEL: string;
+            X11: string;
+        };
+        STATUS: {
+            BEFORECONNECT: string;
+            CONNECT: string;
+            BEFOREDISCONNECT: string;
+            DISCONNECT: string;
+        };
+        HOPPINGTOOL: {
+            NETCAT: string;
+            SOCAT: string;
+            NATIVE: string;
+        };
+    };
+    rawSFTP: () => Promise<SFTPWrapper>;
+    config: Array<SSHConfig>;
+    deregister: Array<any>;
+    disableCache: boolean;
+    constructor(options: Array<SSHConfig> | SSHConfig, disableCache?: boolean);
+    /**
+     * Get SFTP session, with promise and async/await
+     */
+    sftp(): SFTP;
+    emit(event: string | symbol, ...args: any[]): boolean;
+    /**
+     * Get SSH if existing from cache otherwise create new one
+     * @param {*} sshConfig
+     */
+    getSSHConnection(sshConfig: any, isLast: boolean): any;
+    /**
+     * Connect SSH connection, via single or multiple hopping connection
+     * @param {*} Single/Array of sshConfigs
+     */
+    connect(): any;
+    /**
+     * Close SSH Connection
+     */
+    close(): Promise<any[]>;
+}
+export = SSH2Promise;

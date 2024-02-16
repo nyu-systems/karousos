@@ -1,0 +1,55 @@
+{
+  "_from": "on-net-listen@^1.1.1",
+  "_id": "on-net-listen@1.1.2",
+  "_inBundle": false,
+  "_integrity": "sha512-y1HRYy8s/RlcBvDUwKXSmkODMdx4KSuIvloCnQYJ2LdBBC1asY4HtfhXwe3UWknLakATZDnbzht2Ijw3M1EqFg==",
+  "_location": "/on-net-listen",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "on-net-listen@^1.1.1",
+    "name": "on-net-listen",
+    "escapedName": "on-net-listen",
+    "rawSpec": "^1.1.1",
+    "saveSpec": null,
+    "fetchSpec": "^1.1.1"
+  },
+  "_requiredBy": [
+    "/autocannon"
+  ],
+  "_resolved": "https://registry.npmjs.org/on-net-listen/-/on-net-listen-1.1.2.tgz",
+  "_shasum": "671e55a81c910fa7e5b1e4d506545e9ea0f2e11c",
+  "_spec": "on-net-listen@^1.1.1",
+  "_where": "/home/ioanna/karousos/src/runServer/node_modules/autocannon",
+  "author": {
+    "name": "Mathias Buus",
+    "url": "@mafintosh"
+  },
+  "bugs": {
+    "url": "https://github.com/mafintosh/on-net-listen/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {},
+  "deprecated": false,
+  "description": "Observe when something in your node app starts listening on a TCP port",
+  "devDependencies": {
+    "standard": "^10.0.3",
+    "tape": "^4.8.0"
+  },
+  "engines": {
+    "node": ">=9.4.0 || ^8.9.4"
+  },
+  "homepage": "https://github.com/mafintosh/on-net-listen",
+  "license": "MIT",
+  "main": "index.js",
+  "name": "on-net-listen",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mafintosh/on-net-listen.git"
+  },
+  "scripts": {
+    "test": "standard && tape test.js"
+  },
+  "version": "1.1.2"
+}

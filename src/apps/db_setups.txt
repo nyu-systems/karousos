@@ -1,0 +1,10 @@
+Inventory:
+create table inventory (id_type varchar(255), quantity int, updateTime DATETIME, visible tinyint(1), ionRequestID longtext, ionTxID longtext, ionTxNum int, primary key (id_type));
+
+Stack Trace:
+create table stackTrace (id_hash varchar(255), trace longtext, frequency int, ionRequestID longtext, ionTxID longtext, ionTxNum int), primary key (id_hash));
+
+Wiki (I add this only for debug use, will formally write a initialization program (or integrate it into docker file))
+  comment 
+    - add  ionRequestID longtext, ionTxID longtext, ionTxNum int
+    - remove reference column (user)

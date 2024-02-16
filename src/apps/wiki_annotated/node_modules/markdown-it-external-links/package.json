@@ -1,0 +1,32 @@
+{
+  "name": "markdown-it-external-links",
+  "version": "0.0.6",
+  "description": "Plugin for markdown-it that adds CSS classes to links that fall outside of the specified internal domain(s).",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rotorz/markdown-it-external-links"
+  },
+  "keywords": [
+    "markdown-it",
+    "markdown-it-plugin",
+    "link",
+    "external-link"
+  ],
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "npm run test-lint && npm run test-spec",
+    "test-lint": "eslint .",
+    "test-spec": "mocha ./test/spec/ --recursive"
+  },
+  "author": "Rotorz Limited",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^3.0.1",
+    "eslint-config-xo": "^0.13.0",
+    "markdown-it": "^6.0.4",
+    "mocha": "^2.3.4",
+    "mocha-testdata": "^1.1.2",
+    "should": "^8.0.2"
+  }
+}

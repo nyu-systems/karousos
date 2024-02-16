@@ -1,0 +1,83 @@
+/// <reference types="node" />
+import { EventEmitter } from 'events';
+import * as net from 'net';
+import SSH2Promise from './index';
+import TunnelConfig from './tunnelConfig';
+import { ClientChannel, ExecOptions, SFTPWrapper, ShellOptions } from 'ssh2';
+import { Server } from "net";
+import SSHConfig from './sshConfig';
+export default class SSHConnection extends EventEmitter {
+    __sshTunnels: Array<SSH2Promise>;
+    config: SSHConfig;
+    private activeTunnels;
+    private __$connectPromise;
+    private __retries;
+    private __err;
+    private __sftp;
+    private __x11;
+    private sshConnection;
+    constructor(options: SSHConfig);
+    /**
+      * Emit message on this channel
+      * @param {*} channel
+      * @param {*} status
+      * @param {*} payload
+      */
+    emit(channel: string, status: string, payload?: any): boolean;
+    /**
+     * Get shell socket
+     */
+    shell(options?: ShellOptions): Promise<ClientChannel>;
+    /**
+     * Get a sftp session
+     */
+    sftp(createNew: boolean): Promise<SFTPWrapper>;
+    /**
+     * Get a subsys
+     */
+    subsys(cmd: string): Promise<ClientChannel>;
+    /**
+     * Spawn a command
+     */
+    spawn(cmd: string, params?: Array<string>, options?: ExecOptions): Promise<ClientChannel>;
+    /**
+     * Exec a command
+     */
+    exec(cmd: string, params?: Array<string>, options?: ExecOptions): Promise<string>;
+    /**
+     * Forward out
+     */
+    forwardOut(srcIP: string, srcPort: number, destIP: string, destPort: number): Promise<ClientChannel>;
+    /**
+     * Get a Socks Port
+     */
+    getSocksPort(localPort: number): Promise<number>;
+    /**
+     * Get a X11 port
+     */
+    x11(cmd: string): Promise<void>;
+    /**
+     * Close SSH Connection
+     */
+    close(): Promise<void>;
+    /**
+     * Connect the SSH Connection
+     */
+    connect(c?: SSHConfig): Promise<SSHConnection>;
+    /**
+     * Get existing tunnel by name
+     */
+    getTunnel(name: string): TunnelConfig & {
+        server: net.Server;
+    };
+    /**
+     * Add new tunnel if not exist
+     */
+    addTunnel(tunnelConfig: TunnelConfig): Promise<TunnelConfig & {
+        server: Server;
+    }>;
+    /**
+     * Close the tunnel
+     */
+    closeTunnel(name?: string): Promise<void>;
+}

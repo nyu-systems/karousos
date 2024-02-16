@@ -1,0 +1,92 @@
+"use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var readline = require('readline');
+var Writable = require('stream').Writable;
+var mutableStdout = new Writable({
+    write: function (chunk, encoding, callback) {
+        if (!this.muted)
+            process.stdout.write(chunk, encoding);
+        callback();
+    }
+});
+mutableStdout.muted = false;
+exports.default = {
+    /**
+     * Peek the array
+     */
+    peek: function (arr) {
+        return arr[arr.length - 1];
+    },
+    /**
+     * End pty socket session by sending kill signal
+     * @param {*} socket
+     */
+    endSocket: function (socket) {
+        if (socket) {
+            if (socket.writable) {
+                socket.end('\x03');
+                socket.signal('INT');
+                socket.signal('KILL');
+            }
+            socket.close();
+        }
+    },
+    /**
+     * Prompt for asking anything
+     */
+    prompt: function (question, cb) {
+        var rl = readline.createInterface({
+            input: process.stdin,
+            output: mutableStdout,
+            terminal: true
+        });
+        rl.question(question, function (password) {
+            cb(password);
+            rl.close();
+        });
+        mutableStdout.muted = true;
+    },
+    /**
+     * Create a Deferred promise
+     */
+    createDeferredPromise: function () {
+        var __resolve, __reject;
+        var __promise = new Promise((resolve, reject) => {
+            __resolve = resolve;
+            __reject = reject;
+        });
+        return {
+            promise: __promise,
+            resolve: __resolve,
+            reject: __reject
+        };
+    },
+    getRandomPort() {
+        return this.randomNumber(49152, 60999);
+    },
+    randomNumber(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    },
+    checkStreamError(stream, timeout) {
+        return __awaiter(this, void 0, void 0, function* () {
+            stream = yield stream;
+            return new Promise((resolve, reject) => {
+                stream.stderr.on('data', function (data) {
+                    reject(data.toString());
+                });
+                setTimeout(() => { resolve(stream); }, timeout || 500);
+            });
+        });
+    }
+};

@@ -1,0 +1,46 @@
+{
+	"name": "acme",
+	"version": "3.0.3",
+	"description": "Free SSL certificates for Node.js and Browsers. Issued via Let's Encrypt",
+	"homepage": "https://rootprojects.org/acme/",
+	"main": "acme.js",
+	"browser": {},
+	"files": [
+		"*.js",
+		"lib",
+		"bin",
+		"scripts",
+		"dist"
+	],
+	"scripts": {},
+	"repository": {
+		"type": "git",
+		"url": "https://git.rootprojects.org/root/acme.js.git"
+	},
+	"keywords": [
+		"ACME",
+		"Let's Encrypt",
+		"EC",
+		"RSA",
+		"CSR",
+		"browser",
+		"greenlock",
+		"VanillaJS",
+		"ZeroSSL"
+	],
+	"author": "AJ ONeal <coolaj86@gmail.com> (https://coolaj86.com/)",
+	"license": "MPL-2.0",
+	"dependencies": {
+		"@root/acme": "^3.0.2"
+	},
+	"devDependencies": {
+		"@root/csr": "^0.8.1",
+		"dotenv": "^8.1.0",
+		"punycode": "^1.4.1"
+	},
+	"trulyOptionalDependencies": {
+		"eslint": "^6.5.1",
+		"webpack": "^4.41.0",
+		"webpack-cli": "^3.3.9"
+	}
+}

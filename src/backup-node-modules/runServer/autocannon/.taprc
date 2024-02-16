@@ -1,0 +1,6 @@
+esm: false
+ts: false
+jsx: false
+flow: false
+timeout: 900
+coverage: true

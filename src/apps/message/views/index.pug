@@ -1,0 +1,25 @@
+html
+  head
+    title Messages
+  body
+    h1 Message of the day: #{msg}
+    form(action = "/post", method = "POST")
+      div
+        label(for = "date") date:
+        input(name = "date" value = "2019-01-01")
+      br
+      div
+        label(for = "message") message:
+        input(name = "message" value = "hello")
+      br
+      div
+        label(for = "readable") readable:
+        input(name = "readable" value = "yes")
+      br
+      button(type = "submit") Add
+    form(action = "/getdate", method = "POST")
+      div
+        label(for = "search_date") date:
+        input(name = "search_date" value = "2019-01-01")
+      br
+      button(type = "submit") Search

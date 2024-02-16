@@ -1,0 +1,69 @@
+{
+  "_args": [
+    [
+      "graph-data-structure@2.0.0",
+      "/home/ye-cheng/karousos/src/verifier-lib"
+    ]
+  ],
+  "_from": "graph-data-structure@2.0.0",
+  "_id": "graph-data-structure@2.0.0",
+  "_inBundle": false,
+  "_integrity": "sha512-ravWDe9LaV0u27ZDme/8w5xHyyTqIWQsetpzDvBNJsGy4nZQB5IVw/u+7ngdEMZWsHYim+PAHatV4cGQX1XKpQ==",
+  "_location": "/graph-data-structure",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "graph-data-structure@2.0.0",
+    "name": "graph-data-structure",
+    "escapedName": "graph-data-structure",
+    "rawSpec": "2.0.0",
+    "saveSpec": null,
+    "fetchSpec": "2.0.0"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/graph-data-structure/-/graph-data-structure-2.0.0.tgz",
+  "_spec": "2.0.0",
+  "_where": "/home/ye-cheng/karousos/src/verifier-lib",
+  "author": {
+    "name": "Curran Kelleher"
+  },
+  "bugs": {
+    "url": "https://github.com/datavis-tech/graph-data-structure/issues"
+  },
+  "description": "A graph data structure with topological sort.",
+  "devDependencies": {
+    "@types/node": "^15.3.1",
+    "browserify": "^17.0.0",
+    "graph-diagrams": "^0.5.0",
+    "mocha": "^8.4.0",
+    "typescript": "^4.2.4"
+  },
+  "files": [
+    "graph-data-structure.js",
+    "index.d.ts"
+  ],
+  "homepage": "https://github.com/datavis-tech/graph-data-structure#readme",
+  "keywords": [
+    "graph",
+    "data",
+    "structures",
+    "algorithms"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "graph-data-structure",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/datavis-tech/graph-data-structure.git"
+  },
+  "scripts": {
+    "browserify": "browserify index.js -s GraphDataStructure -o graph-data-structure.js",
+    "build": "tsc",
+    "prepublishOnly": "npm run build && npm run browserify",
+    "test": "npm run build && mocha"
+  },
+  "version": "2.0.0"
+}

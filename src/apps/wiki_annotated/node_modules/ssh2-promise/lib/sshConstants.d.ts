@@ -1,0 +1,19 @@
+declare let Constants: {
+    CHANNEL: {
+        SSH: string;
+        TUNNEL: string;
+        X11: string;
+    };
+    STATUS: {
+        BEFORECONNECT: string;
+        CONNECT: string;
+        BEFOREDISCONNECT: string;
+        DISCONNECT: string;
+    };
+    HOPPINGTOOL: {
+        NETCAT: string;
+        SOCAT: string;
+        NATIVE: string;
+    };
+};
+export = Constants;

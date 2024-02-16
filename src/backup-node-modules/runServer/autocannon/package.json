@@ -1,0 +1,108 @@
+{
+  "_from": "autocannon",
+  "_id": "autocannon@7.0.4",
+  "_inBundle": false,
+  "_integrity": "sha512-+A+kSsVrx9F9fFbPAD7YytGQfCKgkaCIut4KrnYBbY2hmboAT065ClxqBsVqstokvFfdBAfSMPh0VSc6ktiimg==",
+  "_location": "/autocannon",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "autocannon",
+    "name": "autocannon",
+    "escapedName": "autocannon",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/autocannon/-/autocannon-7.0.4.tgz",
+  "_shasum": "c812c11af283254bff4bd75cce8383e79550c882",
+  "_spec": "autocannon",
+  "_where": "/home/ioanna/karousos/src/runServer",
+  "author": {
+    "name": "Matteo Collina",
+    "email": "hello@matteocollina.com"
+  },
+  "bin": {
+    "autocannon": "autocannon.js"
+  },
+  "bugs": {
+    "url": "https://github.com/mcollina/autocannon/issues"
+  },
+  "bundleDependencies": false,
+  "contributors": [
+    {
+      "name": "Glen Keane",
+      "email": "glenkeane.94@gmail.com"
+    },
+    {
+      "name": "Donald Robertson"
+    },
+    {
+      "name": "Salman Mitha"
+    }
+  ],
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "cli-table3": "^0.6.0",
+    "clone": "^2.1.2",
+    "color-support": "^1.1.1",
+    "cross-argv": "^1.0.0",
+    "form-data": "^4.0.0",
+    "has-async-hooks": "^1.0.0",
+    "hdr-histogram-js": "^2.0.1",
+    "hdr-histogram-percentiles-obj": "^3.0.0",
+    "http-parser-js": "^0.5.2",
+    "hyperid": "^2.0.3",
+    "manage-path": "^2.0.0",
+    "minimist": "^1.2.0",
+    "on-net-listen": "^1.1.1",
+    "ora": "^5.1.0",
+    "pretty-bytes": "^5.4.1",
+    "progress": "^2.0.3",
+    "reinterval": "^1.1.0",
+    "retimer": "^2.0.0",
+    "semver": "^7.3.2",
+    "timestring": "^6.0.0"
+  },
+  "deprecated": false,
+  "description": "Fast HTTP benchmarking tool written in Node.js",
+  "devDependencies": {
+    "bl": "^4.0.3",
+    "busboy": "^0.3.1",
+    "pre-commit": "^1.1.2",
+    "proxyquire": "^2.1.3",
+    "split2": "^3.2.2",
+    "standard": "^16.0.3",
+    "tap": "^14.10.8"
+  },
+  "homepage": "https://github.com/mcollina/autocannon#readme",
+  "keywords": [
+    "http",
+    "soak",
+    "load",
+    "fast",
+    "wrk",
+    "ab",
+    "test"
+  ],
+  "license": "MIT",
+  "main": "autocannon.js",
+  "name": "autocannon",
+  "pre-commit": [
+    "test"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mcollina/autocannon.git"
+  },
+  "scripts": {
+    "standard:fix": "standard --fix",
+    "test": "standard && tap test/serial/*.test.js test/*.test.js"
+  },
+  "version": "7.0.4"
+}

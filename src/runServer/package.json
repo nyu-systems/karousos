@@ -1,0 +1,17 @@
+{
+  "name": "runserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "autocannon": "^7.0.4",
+    "csv-parser": "^2.3.3",
+    "uuid": "^8.0.0",
+    "wrk": "^1.2.1"
+  }
+}

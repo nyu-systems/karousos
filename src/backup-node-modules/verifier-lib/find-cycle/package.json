@@ -1,0 +1,115 @@
+{
+  "_args": [
+    [
+      "find-cycle@1.0.0",
+      "/home/ye-cheng/karousos/src/verifier-lib"
+    ]
+  ],
+  "_from": "find-cycle@1.0.0",
+  "_id": "find-cycle@1.0.0",
+  "_inBundle": false,
+  "_integrity": "sha512-um47oVzW1wGgkEb1Pbhs/Scb1xYP+RErujOAQCpngJDhG9YHXfOh7HV2l4tFwrNs60XawH4kDul3BvG+ZuTKvQ==",
+  "_location": "/find-cycle",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "find-cycle@1.0.0",
+    "name": "find-cycle",
+    "escapedName": "find-cycle",
+    "rawSpec": "1.0.0",
+    "saveSpec": null,
+    "fetchSpec": "1.0.0"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/find-cycle/-/find-cycle-1.0.0.tgz",
+  "_spec": "1.0.0",
+  "_where": "/home/ye-cheng/karousos/src/verifier-lib",
+  "author": {
+    "name": "Andy Edwards"
+  },
+  "bugs": {
+    "url": "https://github.com/jcoreio/find-cycle/issues"
+  },
+  "config": {
+    "mocha": "./test/**/*.js",
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "description": "find and identify a cycle in a directed graph",
+  "devDependencies": {
+    "@commitlint/cli": "^6.0.2",
+    "@commitlint/config-conventional": "^6.0.2",
+    "@jedwards1211/eslint-config": "^2.0.0",
+    "@jedwards1211/eslint-config-flow": "^1.0.0",
+    "chai": "^4.1.2",
+    "codecov": "^3.0.0",
+    "eslint": "^4.16.0",
+    "eslint-plugin-flowtype": "^2.42.0",
+    "eslint-watch": "^3.1.3",
+    "flow-bin": "^0.64.0",
+    "flow-watch": "^1.1.1",
+    "husky": "^0.14.3",
+    "istanbul": "^0.4.5",
+    "mocha": "^5.0.0",
+    "nyc": "^11.4.1",
+    "semantic-release": "^12.4.1",
+    "travis-deploy-once": "^4.3.3"
+  },
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "homepage": "https://github.com/jcoreio/find-cycle#readme",
+  "keywords": [
+    "cycle",
+    "cycles",
+    "cyclic",
+    "graph",
+    "graphs",
+    "directed",
+    "directed-graph",
+    "directed-graphs",
+    "find",
+    "finder",
+    "search",
+    "detect",
+    "detector",
+    "detection"
+  ],
+  "license": "MIT",
+  "name": "find-cycle",
+  "nyc": {
+    "include": [
+      "*.js"
+    ],
+    "exclude": [
+      "commitlint.config.js"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jcoreio/find-cycle.git"
+  },
+  "scripts": {
+    "codecov": "nyc report --reporter=text-lcov > coverage.lcov; codecov",
+    "commitmsg": "commitlint -e $GIT_PARAMS",
+    "flow": "flow",
+    "flow:coverage": "for file in *.js test/**.js; do echo $file; flow coverage $file; done",
+    "flow:watch": "flow-watch -e js,js.flow,flowconfig --ignore lib/ --ignore node_modules/ --watch .flowconfig --watch *.js --watch test/",
+    "lint": "eslint *.js test --cache",
+    "lint:fix": "eslint --fix *.js test --cache",
+    "lint:watch": "esw --watch *.js test --cache",
+    "open:coverage": "open coverage/lcov-report/index.html",
+    "precommit": "npm run lint && flow",
+    "prepublishOnly": "npm run lint && flow && npm test",
+    "prepush": "npm test",
+    "semantic-release": "semantic-release",
+    "test": "NODE_ENV=production BABEL_ENV=test nyc --reporter=lcov --reporter=text mocha $npm_package_config_mocha",
+    "test:watch": "mocha --watch $npm_package_config_mocha",
+    "travis-deploy-once": "travis-deploy-once"
+  },
+  "version": "1.0.0"
+}

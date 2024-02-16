@@ -1,0 +1,10 @@
+import { ReadStreamOptions, WriteStreamOptions } from 'ssh2-streams';
+import BaseSFTP from './BaseSFTP';
+import SSH2Promise from './index';
+declare class SFTP extends BaseSFTP {
+    ssh: SSH2Promise;
+    constructor(ssh: SSH2Promise);
+    createReadStream(path: string, options?: ReadStreamOptions): Promise<any>;
+    createWriteStream(path: string, options?: WriteStreamOptions): Promise<any>;
+}
+export = SFTP;

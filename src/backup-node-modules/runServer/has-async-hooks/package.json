@@ -1,0 +1,56 @@
+{
+  "_from": "has-async-hooks@^1.0.0",
+  "_id": "has-async-hooks@1.0.0",
+  "_inBundle": false,
+  "_integrity": "sha512-YF0VPGjkxr7AyyQQNykX8zK4PvtEDsUJAPqwu06UFz1lb6EvI53sPh5H1kWxg8NXI5LsfRCZ8uX9NkYDZBb/mw==",
+  "_location": "/has-async-hooks",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "has-async-hooks@^1.0.0",
+    "name": "has-async-hooks",
+    "escapedName": "has-async-hooks",
+    "rawSpec": "^1.0.0",
+    "saveSpec": null,
+    "fetchSpec": "^1.0.0"
+  },
+  "_requiredBy": [
+    "/autocannon"
+  ],
+  "_resolved": "https://registry.npmjs.org/has-async-hooks/-/has-async-hooks-1.0.0.tgz",
+  "_shasum": "3df965ade8cd2d9dbfdacfbca3e0a5152baaf204",
+  "_spec": "has-async-hooks@^1.0.0",
+  "_where": "/home/ioanna/karousos/src/runServer/node_modules/autocannon",
+  "author": {
+    "name": "Renée Kooi",
+    "email": "renee@kooi.me"
+  },
+  "bugs": {
+    "url": "https://github.com/goto-bus-stop/has-async-hooks/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "check if the current node version has async_hooks.",
+  "devDependencies": {
+    "standard": "^11.0.0"
+  },
+  "homepage": "https://github.com/goto-bus-stop/has-async-hooks",
+  "keywords": [
+    "async_hooks",
+    "check",
+    "detect",
+    "node"
+  ],
+  "license": "Apache-2.0",
+  "main": "index.js",
+  "name": "has-async-hooks",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/goto-bus-stop/has-async-hooks.git"
+  },
+  "scripts": {
+    "test": "standard"
+  },
+  "version": "1.0.0"
+}

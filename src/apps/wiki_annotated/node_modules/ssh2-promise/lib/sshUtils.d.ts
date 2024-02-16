@@ -1,0 +1,28 @@
+export interface Deferred<T> {
+    resolve: Function;
+    reject: Function;
+    promise: Promise<T>;
+}
+declare const _default: {
+    /**
+     * Peek the array
+     */
+    peek: (arr: Array<any>) => any;
+    /**
+     * End pty socket session by sending kill signal
+     * @param {*} socket
+     */
+    endSocket: (socket: any) => void;
+    /**
+     * Prompt for asking anything
+     */
+    prompt: (question: string, cb: (password: string) => void) => void;
+    /**
+     * Create a Deferred promise
+     */
+    createDeferredPromise: () => Deferred<any>;
+    getRandomPort(): any;
+    randomNumber(min: number, max: number): number;
+    checkStreamError(stream: any, timeout?: number): Promise<unknown>;
+};
+export default _default;

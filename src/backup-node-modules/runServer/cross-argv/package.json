@@ -1,0 +1,52 @@
+{
+  "_from": "cross-argv@^1.0.0",
+  "_id": "cross-argv@1.0.0",
+  "_inBundle": false,
+  "_integrity": "sha512-uAVe/bgNHlPdP1VE4Sk08u9pAJ7o1x/tVQtX77T5zlhYhuwOWtVkPBEtHdvF5cq48VzeCG5i1zN4dQc8pwLYrw==",
+  "_location": "/cross-argv",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "cross-argv@^1.0.0",
+    "name": "cross-argv",
+    "escapedName": "cross-argv",
+    "rawSpec": "^1.0.0",
+    "saveSpec": null,
+    "fetchSpec": "^1.0.0"
+  },
+  "_requiredBy": [
+    "/autocannon"
+  ],
+  "_resolved": "https://registry.npmjs.org/cross-argv/-/cross-argv-1.0.0.tgz",
+  "_shasum": "e7221e9ff73092a80496c699c8c45efb20f6486c",
+  "_spec": "cross-argv@^1.0.0",
+  "_where": "/home/ioanna/karousos/src/runServer/node_modules/autocannon",
+  "author": {
+    "name": "Mathias Buus",
+    "url": "@mafintosh"
+  },
+  "bugs": {
+    "url": "https://github.com/mafintosh/cross-argv/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {},
+  "deprecated": false,
+  "description": "Cross platform normalization of process.argv",
+  "devDependencies": {
+    "standard": "^11.0.1",
+    "tape": "^4.9.1"
+  },
+  "homepage": "https://github.com/mafintosh/cross-argv",
+  "license": "MIT",
+  "main": "index.js",
+  "name": "cross-argv",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mafintosh/cross-argv.git"
+  },
+  "scripts": {
+    "test": "standard && tape test.js"
+  },
+  "version": "1.0.0"
+}

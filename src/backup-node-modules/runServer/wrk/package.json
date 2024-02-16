@@ -1,0 +1,68 @@
+{
+  "_from": "wrk",
+  "_id": "wrk@1.2.1",
+  "_inBundle": false,
+  "_integrity": "sha512-uJ93Je3il1dY9rBP05OHr91lwdHd5oNoX82oyHhuAfe69mdbEb0fxeufbaLChA9vBfDNj581OrbH/CbaM0az1g==",
+  "_location": "/wrk",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "wrk",
+    "name": "wrk",
+    "escapedName": "wrk",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/wrk/-/wrk-1.2.1.tgz",
+  "_shasum": "64c1a4a42a301963a6a84deeaba005233369a42a",
+  "_spec": "wrk",
+  "_where": "/home/ioanna/karousos/src/runServer",
+  "author": {
+    "name": "Andrey Sidorov",
+    "email": "sidorares@yandex.ru"
+  },
+  "bugs": {
+    "url": "https://github.com/sidorares/node-wrk/issues"
+  },
+  "bundleDependencies": false,
+  "contributors": [
+    {
+      "name": "Wraithan",
+      "email": "xwraithanx@gmail.com",
+      "url": "http://wraithan.net"
+    }
+  ],
+  "dependencies": {},
+  "deprecated": false,
+  "description": "wrk load test tool wrapper and output parser",
+  "devDependencies": {
+    "tap": "^0.4.13"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "test",
+    "example": "example"
+  },
+  "homepage": "https://github.com/sidorares/node-wrk",
+  "keywords": [
+    "wrk",
+    "load test"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "wrk",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sidorares/node-wrk.git"
+  },
+  "scripts": {
+    "test": "tap test/*.tap.js"
+  },
+  "version": "1.2.1"
+}
