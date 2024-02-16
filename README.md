@@ -84,7 +84,7 @@ Check `mysql_binlog/README.md` for instructions on how to set up the MySQL datab
 
 Go to karousos/src and run `./install.sh` (this installs the libraries)	
 
-# Contents of this directory: 
+# Contents of the `src` directory
 - `compiler`: it contains the transpiler plugin and functions that we use 
 to transpile the application code 
 - `server-lib`: the library that contains the functions that the 
@@ -95,10 +95,44 @@ verifier executes to do SIMD and read from the advice/reports
 - `apps`: the applications. The annotated code for application `app_name` should 
 be `apps/app_name_annotated`
 - `workloads`: the workloads that we are running our applications on. 
-Each workload is in a directory `workloads/app_name/workload_name`. 
-	
+   A workload named `$workload_name` would be in the directory `workloads/app_name/$workload_name`.
+- `scripts`: contains scripts we used to generate workloads and scripts for executing experiments.
+- `backup-node-modules`: Backed up node modules used by the karousos libaries.
+- `initWiki`: library to initialize the tables used by wiki in the mysql database.
+- `karousos_uitl`: library with utilities used by `server-lib` and `verifier-lib`.
+- `mysql_binlog`: patches for mysql to collect the write log and utilities to parse the binary log. 
+- `send_request_lua`: Lua scripts to send workloads to the server.`
+
 # Running the code 
 
+You can run the code either on your own machine or from a terminal in the docker container. 
+
+Note: If you use a terminal in a docker container as described above, `$KAR_HOME` is set to `/home/karousos/src`.
+
+## Executing the scripts for the experiments
+
+The scripts for the experiments are located at `src/scripts/experiments`.
+
+* To execute the experiments and produce the results for Figure 6:
+```text
+cd `src/scripts/experiments/kserver_vs_orig`
+./run_experiments.sh # This will run the experiments and write all measurements for the experiments under results
+python3 report_performance.py # parses the measurements in the results and produces csv files under csv_files
+```
+
+If you want to produce results not only for Figure 6 but also for figures 9a, 10a, 11a, and 12a of 
+the Appendix execute `./run_all_experiments.sh` instead of `./run_experiments.sh`.
+
+* To execute the experiments and produce the results for Figures 7 and 8:
+```text
+cd `src/scripts/experiments/kver_vs_orig_concurrent_reqs`
+./run_experiments.sh # This will run the experiments and write all measurements for the experiments under results
+python3 report_performance.py # parses the measurements in the results and produces csv files under csv_files_ver and csv_files_advice
+```
+
+If you also want to produce results for figures 9b, 9c, 10b, 10c, 11b, 11c, 12b, and 12c of 
+the Appendix execute `./run_all_experiments.sh` instead of `./run_experiments.sh`.
+ 
 ## Transpiling the application's code
 
 All following instructions should be run from inside `src`.
@@ -133,8 +167,7 @@ To fully compile an application for the server and the verifier, you can run:
 
 This produces the code for the server and the verifier by running compile.sh and 
 running the code for the server and the code for the verifier once to produce 
-the compiled full code. NOTE: this requires the existence of a workload named test 
-in order to produce results.
+the compiled full code. Note that this requires the existence of a workload named test. 
 
 ## Running the original server and the Karousos server 
 
@@ -165,7 +198,7 @@ Optional parameters:
 - `-o, --orochi-js`: execute the verifier for Orochi-JS instead of Karousos.
 - `-i, --iterations` the number of iterations [default: 1]. 
 
-# Environment variables: 
+# Environment variables
 
 1. `ADVICE_MODE`: Different values of `ADVICE_MODE` correspond to different 
 parts of the advice collection procedure being turned off. 
@@ -187,12 +220,10 @@ them down)
 4. `IGNORE_REQS`: The default value is 0. 
 This is used to control how many requests are used for warmup when we run 
 the server or the verifier (and are, thus, ignored when collecting measurements).
-5. `IN_ORDER`: Set this to true if you want the verifier to execute the requests one by one 
-in the order that the server executes them (no batching). 
 
 # Measurements
 Any measurements from measurements are collected in 
-`karousos/measurements/$app_name-$workload_name/$iteration_no` 
+`$KAR_HOME/measurements/$app_name-$workload_name/$experiment_name/$iteration_no` 
 For the verifier, an extra file is created that maps the cft to the requestIDs in the group
 Measurements are saved in csv files. Each csv file will have two columns. 
 First column is what is measured and second row is the measurement.
