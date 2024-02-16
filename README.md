@@ -1,34 +1,31 @@
 # Karousos: Efficient auditing of event-driven web applications
 
-## Setting up the environment
+## Running on Docker
 
-### Using docker 
+### Set up your environment
+Install Docker, start the daemon and make sure your user can launch 
+containers. Instructions for this depend on the operating system you are using.
+For Linux:
 
-All following instructions should be run from inside `src`.
- 
-To run karousos, the experiments and develop inside a docker container, run 
+* Installation instructions can be found
+    [here](https://docs.docker.com/desktop/install/linux-install/).
+* Instructions for allowing access as a non-root user can be found
+    [here](https://docs.docker.com/engine/install/linux-postinstall/).
+* Instructions for starting the daemon can be found
+    [here](https://docs.docker.com/config/daemon/start/).
 
-```text
-make image-build # Create the image. Takes about 20 mins
-make container-create # Create the karousos-dev container
-make container-start # Start the karousos-dev container
-make karousos-setup # Install karousos libraries
-make prepare-apps # Compile all applications and prepare to run the experiments. Takes about 45 minutes.
+On some Linux distributions you might need to fix DNS resolvers for Docker,
+see [this webpage](https://robinwinslow.uk/fix-docker-networking-dns) for 
+instructions.
+
+### Running Experiments
+To reproduce the results in the paper, please run:
+
+```text 
+make produce-results
 ```
 
-Once you have running container, you can get a terminal inside the container by executing:
-
-```text
-make container-exec
-```
-
-Or you can run the experiments with:
-
-```text
-make run-experiments
-```
-
-The above command will run all experiments for the server and the verifier and produce the data for 
+This will run all experiments for the server and the verifier and produce the data for 
 graphs 6 (written in `src/scripts/experiments/kserver_vs_orig/csv_files`, 
 compare with the data used in the paper under `data-used-in-submission/server`), 
 7 (written in `src/scripts/experiments/kver_vs_orig_concurrent_reqs/csv_files_ver`, 
@@ -37,32 +34,37 @@ and 8 (written in `src/scripts/experiments/kver_vs_orig_concurrent_reqs/csv_file
 compare with the data used in the paper under `data-used-in-submission/advice`)
 of the paper. It takes approximately 15 hours to run all experiments.
 
-If you also want to produce the data for the experiments in the appendix, execute the command:
- 
+
+### Understanding Produce Results
+Internally the `make produce-results` command performs the following operations:
+
+* Creates the container. You can do this manually by running:
+    
+    ```text
+    make image-build # Create the image. Takes about 20 mins
+    make container-create # Create the karousos-dev container
+    make container-start # Start the karousos-dev container
+    make karousos-setup # Install karousos libraries
+    make prepare-apps # Compile all applications and prepare to run the experiments. Takes about 45 minutes.
+    ```
+* Runs the experiments. You can do this manually by running (outside the
+    container):
+    ```text
+    make run-experiments
+    ```
+    If you also want to produce the data for the experiments in the appendix, execute the command:
+     
+    ```text
+    make run-all-experiments
+    ```
+### Debugging Problems
+If you run into problems, you might want to get a terminal: 
+
 ```text
-make run-all-experiments
+make container-exec
 ```
 
-To stop the container run:
-
-```text
-make container-stop
-```
-
-You can also automatically run all above steps by executing:
-```test 
-make produce-results
-```
-which will create the image, start the container, install Karousos dependencies, prepare and run the
-experiments. 
-
-Note: The above commands might requre sudo access. To execute docker without sudo, 
-you need to change the permission of /var/run/docker.sock to 666, i.e. 
-```test 
-chmod 666 /var/run/docker.sock
-```
-
-### In your machine
+## On your machine
 
 #### Requirements
 	
