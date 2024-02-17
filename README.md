@@ -1,90 +1,126 @@
 # Karousos: Efficient auditing of event-driven web applications
 
-## Setting up the environment
+## Running on Docker
 
-### Using docker 
+### Set up your environment
+Install Docker, start the daemon and make sure your user can launch 
+containers. Instructions for this depend on the operating system you are using.
+For Linux:
 
-All following instructions should be run from inside `src`.
- 
-To run karousos, the experiments and develop inside a docker container, run 
+* Installation instructions can be found
+    [here](https://docs.docker.com/desktop/install/linux-install/).
+* Instructions for allowing access as a non-root user can be found
+    [here](https://docs.docker.com/engine/install/linux-postinstall/).
+* Instructions for starting the daemon can be found
+    [here](https://docs.docker.com/config/daemon/start/).
 
-```text
-make image-build # Create the image. Takes about 20 mins
-make container-create # Create the karousos-dev container
-make container-start # Start the karousos-dev container
-make karousos-setup # Install karousos libraries
-make prepare-apps # Compile all applications and prepare to run the experiments. Takes about 45 minutes.
+On some Linux distributions you might need to fix DNS resolvers for Docker,
+see [this webpage](https://robinwinslow.uk/fix-docker-networking-dns) for 
+instructions.
+
+### Running Experiments
+To reproduce the results in the paper, please run:
+
+```text 
+make produce-results
 ```
 
-Once you have running container, you can get a terminal inside the container by executing:
+This will run all experiments for the server and the verifier and produce data and figures. Specifically:
+- data for figure 6 (written in `src/scripts/experiments/kserver_vs_orig/csv_files`, 
+compare with the data used in the paper under `data-used-in-submission/server`), 
+- figure 6 (plots located in `src/scripts/experiments/kserver_vs_orig/plots`), 
+- data for figure 7 (written in `src/scripts/experiments/kver_vs_orig_concurrent_reqs/csv_files_ver`, 
+compare with the data used in the paper under `data-used-in-submission/verifier`),
+- figure 7 (plots are in `src/scripts/experiments/kver_vs_orig_concurrent_reqs/plots` and
+are prefixed `kver_vs_baseline`), 
+- data for figure 8 (written in `src/scripts/experiments/kver_vs_orig_concurrent_reqs/csv_files_advice`, 
+compare with the data used in the paper under `data-used-in-submission/advice`), and
+- figure 8 (plots are in `src/scripts/experiments/kver_vs_orig_concurrent_reqs/plots` and
+are prefixed `advice_size`).
+
+In the data and figure file names we include the name of the application and the type of the workload.
+The letter `m` corresponds to mixed workload, the letter `w` corresponds to write-heavy workload, and
+the letter `r` corresponds to read-heavy workload. 
+
+It takes approximately 16.5 hours to run all experiments.
+
+### Understanding Produce Results
+Internally the `make produce-results` command performs the following operations:
+
+* Creates the container. You can do this manually by running:
+    
+    ```text
+    make image-build # Create the image. Takes about 20 mins
+    make container-create # Create the karousos-dev container
+    make container-start # Start the karousos-dev container
+    make karousos-setup # Install karousos libraries
+    make prepare-apps # Compile all applications and prepare to run the experiments. Takes about 45 minutes.
+    ```
+* Runs the experiments. You can do this manually by running (outside the
+    container):
+    ```text
+    make run-experiments
+    ```
+    If you also want to produce the data for the experiments in the appendix, execute the command:
+     
+    ```text
+    make run-all-experiments
+    ```
+### Debugging Problems
+If you run into problems, you might want to get a terminal: 
 
 ```text
 make container-exec
 ```
 
-Or you can run the experiments with:
+## On your machine
 
-```text
-make run-experiments
-```
-
-The above command will run all experiments for the server and the verifier and produce the data for 
-graphs 6 (written in `src/scripts/experiments/kserver_vs_orig/csv_files`, 
-compare with the data used in the paper under `data-used-in-submission/server`), 
-7 (written in `src/scripts/experiments/kver_vs_orig_concurrent_reqs/csv_files_ver`, 
-compare with the data used in the paper under `data-used-in-submission/verifier`), 
-and 8 (written in `src/scripts/experiments/kver_vs_orig_concurrent_reqs/csv_files_advice`, 
-compare with the data used in the paper under `data-used-in-submission/advice`)
-of the paper. It takes approximately 15 hours to run all experiments.
-
-If you also want to produce the data for the experiments in the appendix, execute the command:
- 
-```text
-make run-all-experiments
-```
-
-To stop the container run:
-
-```text
-make container-stop
-```
-
-You can also automatically run all above steps by executing:
-```test 
-make produce-results
-```
-which will create the image, start the container, install Karousos dependencies, prepare and run the
-experiments. 
-
-Note: The above commands might requre sudo access. To execute docker without sudo, 
-you need to change the permission of /var/run/docker.sock to 666, i.e. 
-```test 
-chmod 666 /var/run/docker.sock
-```
-
-### In your machine
-
-#### Requirements
+### Requirements
 	
 - Node v12.16.1
 - NPM 6.13.4
-- MySql 8.0.19
+- [wrk](https://github.com/wg/wrk.git)
 
-##### Installation/Configuration
+### Installation/Configuration
+
+Karousos requires installing a modified version of MySQL. See  
+`mysql_binlog/README.md` for instructions on how to set up the MySQL database. 
+
+After installing MySQL, use the following commands to crate the databases and tables required by
+Karousos:
+```text
+	CREATE DATABASE test;
+	CREATE DATABASE wiki;
+	USE test;
+	create table inventory ( \
+			id_type varchar(255), \ 
+			quantity int, \
+			updateTime DATETIME, \ 
+			visible tinyint(1), \
+			ionRequestID longtext, \
+			ionTxID longtext, \
+			ionTxNum int, \
+			primary key (id_type) \
+		);
+```
+
+Furthermore, Karousos hardcodes the MySQL db password to 1234. You can do this with the following 
+command:
+```text
+ALTER USER 'root'@'localhost' IDENTIFIED BY '1234';
+```
 
 Export a variable `KAR_HOME` that should be set to the 
 location of the karousos repository in the local file system. This 
-path should NOT end with '/' e.g. it can be `~/karousos` but not `~/karousos/`
+path should *not* end with '/' e.g. it can be `~/karousos` but not `~/karousos/`
 
 Also export a variable `MYSQL_INSTALL_LOC` that should be set to the folder where mysql 
 is installed. This location should be in the user space (i.e. accessing the directories in 
 this folder should not require sudo access). 
 
-Check `mysql_binlog/README.md` for instructions on how to set up the MySQL database. 
+Go to karousos/src and run `./install.sh` (this installs the libraries).	
 
-Go to karousos/src and run `./install.sh` (this installs the libraries)	
-
-# Contents of this directory: 
+# Contents of the `src` directory
 - `compiler`: it contains the transpiler plugin and functions that we use 
 to transpile the application code 
 - `server-lib`: the library that contains the functions that the 
@@ -95,10 +131,58 @@ verifier executes to do SIMD and read from the advice/reports
 - `apps`: the applications. The annotated code for application `app_name` should 
 be `apps/app_name_annotated`
 - `workloads`: the workloads that we are running our applications on. 
-Each workload is in a directory `workloads/app_name/workload_name`. 
-	
+   A workload named `$workload_name` would be in the directory `workloads/app_name/$workload_name`.
+- `scripts`: contains scripts we used to generate workloads and scripts for executing experiments.
+- `backup-node-modules`: Backed up node modules used by the karousos libaries.
+- `initWiki`: library to initialize the tables used by wiki in the mysql database.
+- `karousos_uitl`: library with utilities used by `server-lib` and `verifier-lib`.
+- `mysql_binlog`: patches for mysql to collect the write log and utilities to parse the binary log. 
+- `send_request_lua`: Lua scripts to send workloads to the server.`
+
 # Running the code 
 
+You can run the code either on your own machine or from a terminal in the docker container. 
+
+Note: If you use a terminal in a docker container as described above, `$KAR_HOME` is set to `/home/karousos/src`.
+
+## Executing the scripts for the experiments
+
+The scripts for the experiments are located at `src/scripts/experiments`.
+
+* To execute the experiments and produce the results for Figure 6:
+```text
+cd `src/scripts/experiments/kserver_vs_orig`
+./run_experiments.sh # This will run the experiments and write all measurements for the experiments under results
+python3 produce_csv.py # parses the measurements in the results and produces csv files under csv_files
+./gen_plots.sh # parses the data under csv_files and produces Figure 6.
+```
+
+If you want to produce results not only for Figure 6 but also for figures 9a, 10a, 11a, and 12a of 
+the Appendix execute:
+```text
+cd `src/scripts/experiments/kserver_vs_orig`
+./run__all_experiments.sh
+python3 produce_csv.py --all
+./gen_plots.sh --all
+```
+
+* To execute the experiments and produce the results for Figures 7 and 8:
+```text
+cd `src/scripts/experiments/kver_vs_orig_concurrent_reqs`
+./run_experiments.sh # This will run the experiments and write all measurements for the experiments under results
+python3 produce_csv.py # parses the measurements in the results and produces csv files under csv_files_ver and csv_files_advice
+./gen_plots.sh # parses the data under csv_files_ver and csv_files_advice and produces Figures 7 and 8.
+```
+
+If you also want to produce results for figures 9b, 9c, 10b, 10c, 11b, 11c, 12b, and 12c of 
+the Appendix execute: 
+```text
+cd `src/scripts/experiments/kver_vs_orig_concurrent_reqs`
+./run_all_experiments.sh 
+python3 produce_csv.py --all
+./gen_plots.sh --all
+```
+ 
 ## Transpiling the application's code
 
 All following instructions should be run from inside `src`.
@@ -133,8 +217,7 @@ To fully compile an application for the server and the verifier, you can run:
 
 This produces the code for the server and the verifier by running compile.sh and 
 running the code for the server and the code for the verifier once to produce 
-the compiled full code. NOTE: this requires the existence of a workload named test 
-in order to produce results.
+the compiled full code. Note that this requires the existence of a workload named test. 
 
 ## Running the original server and the Karousos server 
 
@@ -165,7 +248,7 @@ Optional parameters:
 - `-o, --orochi-js`: execute the verifier for Orochi-JS instead of Karousos.
 - `-i, --iterations` the number of iterations [default: 1]. 
 
-# Environment variables: 
+# Environment variables
 
 1. `ADVICE_MODE`: Different values of `ADVICE_MODE` correspond to different 
 parts of the advice collection procedure being turned off. 
@@ -187,12 +270,10 @@ them down)
 4. `IGNORE_REQS`: The default value is 0. 
 This is used to control how many requests are used for warmup when we run 
 the server or the verifier (and are, thus, ignored when collecting measurements).
-5. `IN_ORDER`: Set this to true if you want the verifier to execute the requests one by one 
-in the order that the server executes them (no batching). 
 
 # Measurements
 Any measurements from measurements are collected in 
-`karousos/measurements/$app_name-$workload_name/$iteration_no` 
+`$KAR_HOME/measurements/$app_name-$workload_name/$experiment_name/$iteration_no` 
 For the verifier, an extra file is created that maps the cft to the requestIDs in the group
 Measurements are saved in csv files. Each csv file will have two columns. 
 First column is what is measured and second row is the measurement.
