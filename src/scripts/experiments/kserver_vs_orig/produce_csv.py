@@ -46,7 +46,7 @@ def get_median_with_err(fname, name, app_name):
 
 def processDataForBenchmark(name, benchmark):
     res = [[
-        "Concurrent requests", 
+        "#Concurrent requests", 
         "Baseline(s) [median]",
         "Baseline(s) [5th Percentile]",
         "Baseline(s) [95th Percentile]",

@@ -93,7 +93,7 @@ def processDataForBenchmark(name, benchmark):
         kver = get_median_with_err(os.path.join(measurements_path, base_fname), "Verifier");
         kver_orochi = get_median_with_err(os.path.join(measurements_path, base_fname), "Orochi-JS");
         #Returns the data for individual ops in server execution and 5th percentile, 95th percentile for the other execution
-        res_ver.append([ str(req_no), original[0], original[1], original[2], kver[0], kver[1], kver[2], kver_orochi[0], kver_orochi[1], kver_orochi[2]])
+        res_ver.append([ str(p), original[0], original[1], original[2], kver[0], kver[1], kver[2], kver_orochi[0], kver_orochi[1], kver_orochi[2]])
         advice_size = get_measurement(os.path.join(measurements_advice_path, base_fname), 1);
         advice_size_orochi = get_measurement(os.path.join(measurements_advice_path, base_fname), 2);
         res_advice.append([ p , advice_size, advice_size_orochi]);
