@@ -31,7 +31,8 @@ RUN apt-get update && apt-get install -y \
 	luajit \
 	rsync \
 	curl \
-	python3-pip && \
+	python3-pip \
+	gnuplot && \
 	pip3 install numpy
 
 RUN git clone https://github.com/wg/wrk.git wrk && \
